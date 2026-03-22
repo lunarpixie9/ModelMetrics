@@ -46,7 +46,7 @@ Make sure you have the following installed:
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/ModelMetrics.git
+git clone https://github.com/lunarpixie9/ModelMetrics.git
 cd ModelMetrics 
 ```
 
