@@ -1,4 +1,4 @@
-ModelMetrics
+## ModelMetrics
 
 A Java desktop application that evaluates and compares the performance of multiple Large Language Models (LLMs) in real time. Built with JavaFX for visualization and Java Streams for data analysis.
 
@@ -58,11 +58,6 @@ private final String geminiKey = "YOUR_GEMINI_KEY";
 private final String anthropicKey = "YOUR_ANTHROPIC_KEY";
 ```
 with your actual API keys.
-
-> **Get API keys here:**
-> - GPT-4o → [platform.openai.com](https://platform.openai.com)
-> - Gemini → [aistudio.google.com](https://aistudio.google.com) (free)
-> - Claude Sonnet → [console.anthropic.com](https://console.anthropic.com)
 
 ### 3. Run the app
 ```
