@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.modelmetrics.ui.DashboardController"
+      spacing="15" style="-fx-background-color: #1e1e2e; -fx-padding: 20;">
+
+    <!-- Header -->
+    <Label text="ModelMetrics Dashboard"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #cdd6f4;"/>
+
+    <!-- Prompt Input Row -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="promptField"
+                   promptText="Enter a prompt to evaluate..."
+                   style="-fx-background-color: #313244; -fx-text-fill: #cdd6f4; -fx-prompt-text-fill: #6c7086; -fx-padding: 8;"
+                   HBox.hgrow="ALWAYS" prefWidth="600"/>
+        <Button fx:id="runButton" text="Run Evaluation"
+                onAction="#handleRunEvaluation"
+                style="-fx-background-color: #89b4fa; -fx-text-fill: #1e1e2e; -fx-font-weight: bold; -fx-padding: 8 16;"/>
+    </HBox>
+
+    <!-- Status Label -->
+    <Label fx:id="statusLabel" text="Enter a prompt and click Run Evaluation"
+           style="-fx-text-fill: #a6adc8; -fx-font-size: 12px;"/>
+
+    <!-- Charts Row -->
+    <HBox spacing="15">
+        <!-- Response Time Chart -->
+        <BarChart fx:id="responseTimeChart" title="Response Time (ms)"
+                  style="-fx-background-color: #313244;"
+                  HBox.hgrow="ALWAYS" prefHeight="280">
+            <xAxis><CategoryAxis label="Model"/></xAxis>
+            <yAxis><NumberAxis label="Time (ms)"/></yAxis>
+        </BarChart>
+
+        <!-- Word Count Chart -->
+        <BarChart fx:id="wordCountChart" title="Word Count"
+                  style="-fx-background-color: #313244;"
+                  HBox.hgrow="ALWAYS" prefHeight="280">
+            <xAxis><CategoryAxis label="Model"/></xAxis>
+            <yAxis><NumberAxis label="Words"/></yAxis>
+        </BarChart>
+    </HBox>
+
+    <!-- Results Table -->
+    <TableView fx:id="resultsTable" style="-fx-background-color: #313244;"
+               VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="modelCol" text="Model" prefWidth="150"/>
+            <TableColumn fx:id="timeCol" text="Response Time (ms)" prefWidth="180"/>
+            <TableColumn fx:id="wordsCol" text="Word Count" prefWidth="120"/>
+            <TableColumn fx:id="responseCol" text="Response Preview" prefWidth="400"/>
+        </columns>
+    </TableView>
+
+</VBox>
