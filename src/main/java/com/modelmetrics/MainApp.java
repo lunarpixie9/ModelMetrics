@@ -12,7 +12,10 @@ public class MainApp extends Application {
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/com/modelmetrics/dashboard.fxml")
         );
-        Scene scene = new Scene(loader.load(), 900, 600);
+        Scene scene = new Scene(loader.load(), 1100, 700);
+        scene.getStylesheets().add(
+                getClass().getResource("/com/modelmetrics/styles.css").toExternalForm()
+        );
         stage.setTitle("ModelMetrics");
         stage.setScene(scene);
         stage.show();

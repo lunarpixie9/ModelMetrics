@@ -5,57 +5,221 @@
 <?import javafx.scene.chart.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
+<HBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.modelmetrics.ui.DashboardController"
-      spacing="15" style="-fx-background-color: #1e1e2e; -fx-padding: 20;">
+      style="-fx-background-color: #F5F0E8;">
 
-    <!-- Header -->
-    <Label text="ModelMetrics Dashboard"
-           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #cdd6f4;"/>
+    <!-- SIDEBAR -->
+    <VBox prefWidth="220"
+          style="-fx-background-color: #1C1C1E; -fx-padding: 28 20 28 20;"
+          spacing="6">
 
-    <!-- Prompt Input Row -->
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <TextField fx:id="promptField"
-                   promptText="Enter a prompt to evaluate..."
-                   style="-fx-background-color: #313244; -fx-text-fill: #cdd6f4; -fx-prompt-text-fill: #6c7086; -fx-padding: 8;"
-                   HBox.hgrow="ALWAYS" prefWidth="600"/>
-        <Button fx:id="runButton" text="Run Evaluation"
-                onAction="#handleRunEvaluation"
-                style="-fx-background-color: #89b4fa; -fx-text-fill: #1e1e2e; -fx-font-weight: bold; -fx-padding: 8 16;"/>
-    </HBox>
+        <VBox spacing="2" style="-fx-padding: 0 0 24 0;">
+            <Label text="Themis"
+                   style="-fx-font-family: 'Poppins'; -fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #F5F0E8;"/>
+            <Label text="LLM Evaluation System"
+                   style="-fx-font-size: 13px; -fx-text-fill: #b6b6b6; -fx-font-family: 'Poppins';"/>
+        </VBox>
 
-    <!-- Status Label -->
-    <Label fx:id="statusLabel" text="Enter a prompt and click Run Evaluation"
-           style="-fx-text-fill: #a6adc8; -fx-font-size: 12px;"/>
 
-    <!-- Charts Row -->
-    <HBox spacing="15">
-        <!-- Response Time Chart -->
-        <BarChart fx:id="responseTimeChart" title="Response Time (ms)"
-                  style="-fx-background-color: #313244;"
-                  HBox.hgrow="ALWAYS" prefHeight="280">
-            <xAxis><CategoryAxis label="Model"/></xAxis>
-            <yAxis><NumberAxis label="Time (ms)"/></yAxis>
-        </BarChart>
+        <HBox spacing="10" alignment="CENTER_LEFT"
+              style="-fx-background-color: #8FAF8A; -fx-background-radius: 10; -fx-padding: 10 14;">
+            <Label style="-fx-text-fill: #1C1C1E; -fx-font-size: 12px;"/>
+            <Label text="Dashboard"
+                   style="-fx-text-fill: #1C1C1E; -fx-font-size: 13px; -fx-font-weight: bold; -fx-font-family: 'Poppins';"/>
+        </HBox>
 
-        <!-- Word Count Chart -->
-        <BarChart fx:id="wordCountChart" title="Word Count"
-                  style="-fx-background-color: #313244;"
-                  HBox.hgrow="ALWAYS" prefHeight="280">
-            <xAxis><CategoryAxis label="Model"/></xAxis>
-            <yAxis><NumberAxis label="Words"/></yAxis>
-        </BarChart>
-    </HBox>
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10 14;">
+            <Label style="-fx-text-fill: #666666; -fx-font-size: 12px;"/>
+            <Label text="Evaluations"
+                   style="-fx-text-fill: #666666; -fx-font-size: 13px; -fx-font-family: 'Poppins';"/>
+        </HBox>
 
-    <!-- Results Table -->
-    <TableView fx:id="resultsTable" style="-fx-background-color: #313244;"
-               VBox.vgrow="ALWAYS">
-        <columns>
-            <TableColumn fx:id="modelCol" text="Model" prefWidth="150"/>
-            <TableColumn fx:id="timeCol" text="Response Time (ms)" prefWidth="180"/>
-            <TableColumn fx:id="wordsCol" text="Word Count" prefWidth="120"/>
-            <TableColumn fx:id="responseCol" text="Response Preview" prefWidth="400"/>
-        </columns>
-    </TableView>
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10 14;">
+            <Label  style="-fx-text-fill: #666666; -fx-font-size: 12px;"/>
+            <Label text="History"
+                   style="-fx-text-fill: #666666; -fx-font-size: 13px; -fx-font-family: 'Poppins';"/>
+        </HBox>
 
-</VBox>
+        <Separator style="-fx-padding: 8 0;"/>
+
+        <Label text="TOOLS"
+               style="-fx-font-size: 9px; -fx-text-fill: #555555; -fx-padding: 8 0 4 6; -fx-font-family: 'Poppins';"/>
+
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10 14;">
+            <Label style="-fx-text-fill: #666666; -fx-font-size: 12px;"/>
+            <Label text="Export CSV"
+                   style="-fx-text-fill: #666666; -fx-font-size: 13px; -fx-font-family: 'Poppins';"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10 14;">
+            <Label style="-fx-text-fill: #666666; -fx-font-size: 12px;"/>
+            <Label text="Settings"
+                   style="-fx-text-fill: #666666; -fx-font-size: 13px; -fx-font-family: 'Poppins';"/>
+        </HBox>
+
+        <Region VBox.vgrow="ALWAYS"/>
+
+        <VBox spacing="6" style="-fx-padding: 0 0 8 0;">
+            <Label text="CONNECTED MODELS"
+                   style="-fx-font-size: 9px; -fx-text-fill: #555555; -fx-padding: 0 0 4 4; -fx-font-family: 'Poppins';"/>
+            <HBox spacing="8" alignment="CENTER_LEFT"
+                  style="-fx-padding: 6 10; -fx-background-color: #2A2A2C; -fx-background-radius: 8;">
+                <Label text="●" style="-fx-text-fill: #efc53b; -fx-font-size: 9px;"/>
+                <Label text="GPT-4o"
+                       style="-fx-text-fill: #AAAAAA; -fx-font-size: 11px; -fx-font-family: 'Poppins';"/>
+            </HBox>
+            <HBox spacing="8" alignment="CENTER_LEFT"
+                  style="-fx-padding: 6 10; -fx-background-color: #2A2A2C; -fx-background-radius: 8;">
+                <Label text="●" style="-fx-text-fill: #efc53b; -fx-font-size: 9px;"/>
+                <Label text="Gemini 1.5 Pro"
+                       style="-fx-text-fill: #AAAAAA; -fx-font-size: 11px; -fx-font-family: 'Poppins';"/>
+            </HBox>
+            <HBox spacing="8" alignment="CENTER_LEFT"
+                  style="-fx-padding: 6 10; -fx-background-color: #2A2A2C; -fx-background-radius: 8;">
+                <Label text="●" style="-fx-text-fill: #efc53b; -fx-font-size: 9px;"/>
+                <Label text="Claude Sonnet"
+                       style="-fx-text-fill: #AAAAAA; -fx-font-size: 11px; -fx-font-family: 'Poppins';"/>
+            </HBox>
+        </VBox>
+    </VBox>
+
+    <!-- MAIN CONTENT -->
+    <VBox HBox.hgrow="ALWAYS"
+          style="-fx-background-color: #F5F0E8; -fx-padding: 28 28 28 28;"
+          spacing="20">
+
+        <!-- Top Bar -->
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label text="Hello, Curious Mind!"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1C1C1E;"/>
+                <Label text="Compare LLM performance in real time. Enter a prompt to begin."
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 12px; -fx-text-fill: #474747;"/>
+            </VBox>
+            <Button fx:id="clearButton" text="↺  Reset"
+                    onAction="#handleClear"
+                    style="-fx-background-color: transparent; -fx-border-color: #CCBBAA; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #262525; -fx-font-family: 'Poppins'; -fx-font-size: 12px; -fx-padding: 8 16; -fx-cursor: hand;"/>
+            <Button fx:id="exportButton" text="↓  Export CSV"
+                    onAction="#handleExportCSV"
+                    style="-fx-background-color: #efc53b; -fx-background-radius: 8; -fx-text-fill: #1C1C1E; -fx-font-family: 'Poppins'; -fx-font-weight: bold; -fx-font-size: 12px; -fx-padding: 8 16; -fx-cursor: hand;"/>
+        </HBox>
+
+        <!-- Prompt Input -->
+        <HBox spacing="12" alignment="CENTER_LEFT"
+              style="-fx-background-color: #FFFFFF; -fx-background-radius: 14; -fx-padding: 6 6 6 16; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 2);">
+            <Label text="🔍" style="-fx-font-size: 14px;"/>
+            <TextField fx:id="promptField"
+                       promptText="Ask anything: math, coding, general knowledge, creative writing..."
+                       style="-fx-background-color: transparent; -fx-text-fill: #1C1C1E; -fx-prompt-text-fill: #878787; -fx-font-family: 'Poppins'; -fx-font-size: 13px; -fx-border-width: 0; -fx-padding: 10 0;"
+                       HBox.hgrow="ALWAYS"/>
+            <Button fx:id="runButton" text="Run Evaluation →"
+                    onAction="#handleRunEvaluation"
+                    style="-fx-background-color: #1C1C1E; -fx-text-fill: #F5F0E8; -fx-font-family: 'Poppins'; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 12 22; -fx-background-radius: 10; -fx-cursor: hand;"/>
+        </HBox>
+
+        <!-- Status -->
+        <Label fx:id="statusLabel"
+               text="Enter a prompt and click 'Run Evaluation' to begin"
+               style="-fx-font-family: 'Poppins'; -fx-font-size: 12px; -fx-text-fill: #616060; -fx-padding: 0 4;"/>
+
+        <!-- Summary Cards -->
+        <HBox spacing="14">
+            <VBox HBox.hgrow="ALWAYS"
+                  style="-fx-background-color:  #8FAF8A; -fx-background-radius: 16; -fx-padding: 18 20;" spacing="6">
+                <Label text="Fastest Model"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 13px; -fx-text-fill: #000000; -fx-font-weight: bold;"/>
+                <Label fx:id="fastestLabel" text="—"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1C1C1E;"/>
+                <Label fx:id="fastestTimeLabel" text="awaiting results"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 11px; -fx-text-fill: #202320;"/>
+            </VBox>
+
+            <VBox HBox.hgrow="ALWAYS"
+                  style="-fx-background-color: #E8D44D; -fx-background-radius: 16; -fx-padding: 18 20;" spacing="6">
+                <Label text="Most Readable"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 13px; -fx-text-fill: #322801; -fx-font-weight: bold;"/>
+                <Label fx:id="readableLabel" text="—"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1C1C1E;"/>
+                <Label fx:id="readableScoreLabel" text="awaiting results"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 11px; -fx-text-fill: #6B5900;"/>
+            </VBox>
+
+            <VBox HBox.hgrow="ALWAYS"
+                  style="-fx-background-color: #FFFFFF; -fx-background-radius: 16; -fx-padding: 18 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 2);"
+                  spacing="6">
+                <Label text="Most Concise"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 13px; -fx-text-fill: #101010; -fx-font-weight: bold;"/>
+                <Label fx:id="conciseLabel" text="—"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1C1C1E;"/>
+                <Label fx:id="conciseWordsLabel" text="awaiting results"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 11px; -fx-text-fill: #AAAAAA;"/>
+            </VBox>
+
+            <VBox HBox.hgrow="ALWAYS"
+                  style="-fx-background-color: #EDE8DF; -fx-background-radius: 16; -fx-padding: 18 20;" spacing="6">
+                <Label text="Prompts Run"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 13px; -fx-text-fill: #302f2f; -fx-font-weight: bold;"/>
+                <Label fx:id="promptCountLabel" text="0"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1C1C1E;"/>
+                <Label text="this session"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 11px; -fx-text-fill: #504f4f;"/>
+            </VBox>
+        </HBox>
+
+        <!-- Charts Row -->
+        <HBox spacing="14" VBox.vgrow="ALWAYS">
+            <VBox HBox.hgrow="ALWAYS"
+                  style="-fx-background-color: #FFFFFF; -fx-background-radius: 16; -fx-padding: 16 18; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 2);"
+                  spacing="8">
+                <Label text="Response Time (ms)"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1C1C1E;"/>
+                <Label text="Lower is better"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 10px; -fx-text-fill: #AAAAAA;"/>
+                <BarChart fx:id="responseTimeChart" VBox.vgrow="ALWAYS"
+                          style="-fx-background-color: transparent;" animated="true" legendVisible="false">
+                    <xAxis><CategoryAxis/></xAxis>
+                    <yAxis><NumberAxis/></yAxis>
+                </BarChart>
+            </VBox>
+
+            <VBox HBox.hgrow="ALWAYS"
+                  style="-fx-background-color: #FFFFFF; -fx-background-radius: 16; -fx-padding: 16 18; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 2);"
+                  spacing="8">
+                <Label text="Word Count"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1C1C1E;"/>
+                <Label text="Response verbosity comparison"
+                       style="-fx-font-family: 'Poppins'; -fx-font-size: 10px; -fx-text-fill: #AAAAAA;"/>
+                <BarChart fx:id="wordCountChart" VBox.vgrow="ALWAYS"
+                          style="-fx-background-color: transparent;" animated="true" legendVisible="false">
+                    <xAxis><CategoryAxis/></xAxis>
+                    <yAxis><NumberAxis/></yAxis>
+                </BarChart>
+            </VBox>
+        </HBox>
+
+        <!-- Results Table -->
+        <VBox style="-fx-background-color: #FFFFFF; -fx-background-radius: 16; -fx-padding: 16 18; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 2);"
+              spacing="10" VBox.vgrow="ALWAYS">
+            <Label text="Detailed Results"
+                   style="-fx-font-family: 'Poppins'; -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1C1C1E;"/>
+            <TableView fx:id="resultsTable" VBox.vgrow="ALWAYS"
+                       style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                <columns>
+                    <TableColumn fx:id="modelCol" text="Model" prefWidth="130"/>
+                    <TableColumn fx:id="timeCol" text="Time (ms)" prefWidth="100"/>
+                    <TableColumn fx:id="wordsCol" text="Words" prefWidth="80"/>
+                    <TableColumn fx:id="readabilityCol" text="Readability" prefWidth="100"/>
+                    <TableColumn fx:id="lengthCategoryCol" text="Length" prefWidth="80"/>
+                    <TableColumn fx:id="codeBlockCol" text="Has Code" prefWidth="85"/>
+                    <TableColumn fx:id="responseCol" text="Response Preview" prefWidth="320"/>
+                </columns>
+                <placeholder>
+                    <Label text="No results yet — run an evaluation to see data here"
+                           style="-fx-font-family: 'Poppins'; -fx-text-fill: #6a6a6a; -fx-font-size: 12px;"/>
+                </placeholder>
+            </TableView>
+        </VBox>
+
+    </VBox>
+</HBox>

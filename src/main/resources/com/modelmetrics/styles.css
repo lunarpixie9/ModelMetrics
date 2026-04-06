@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.woff2');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Bold.woff2');
+    font-weight: bold;
+}
+
+.root {
+    -fx-font-family: 'Poppins';
+    -fx-font-size: 13px;
+}
+
+.label {
+    -fx-font-family: 'Poppins';
+}
+
+.text-field {
+    -fx-font-family: 'Poppins';
+    -fx-font-size: 13px;
+}
+
+.button {
+    -fx-font-family: 'Poppins';
+    -fx-font-size: 13px;
+}
+
+.table-view {
+    -fx-font-family: 'Poppins';
+    -fx-font-size: 12px;
+}
+
+.table-column {
+    -fx-font-family: 'Poppins';
+    -fx-font-size: 12px;
+}
+
+.chart {
+    -fx-font-family: 'Poppins';
+}
+
+.axis-label {
+    -fx-font-family: 'Poppins';
+    -fx-font-size: 11px;
+}
