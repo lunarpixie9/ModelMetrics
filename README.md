@@ -1,4 +1,4 @@
-## ModelMetrics
+## Themis - LLM Evaluation System
 
 A Java desktop application that evaluates and compares the performance of multiple Large Language Models (LLMs) in real time. Built with JavaFX for visualization and Java Streams for data analysis.
 
