@@ -33,7 +33,27 @@ public class EvaluationService {
                 .min(Comparator.comparingInt(LLMResponse::getWordCount))
                 .orElseThrow();
     }
+    // Get highest quality response
+    public LLMResponse getHighestQuality(List<LLMResponse> responses) {
+        return responses.stream()
+                .max(Comparator.comparingDouble(LLMResponse::getQualityScore))
+                .orElseThrow();
+    }
 
+    // Generate full AI-powered summary
+    public String generateAISummary(List<LLMResponse> responses, String recommendation) {
+        LLMResponse fastest = getFastest(responses);
+        LLMResponse mostReadable = getMostReadable(responses);
+        LLMResponse highestQuality = getHighestQuality(responses);
+
+        return String.format(
+                "⚡ Fastest: %s (%dms) | 📖 Most Readable: %s | ⭐ Best Quality: %s (%.1f/10) | 💡 %s",
+                fastest.getModelName(), fastest.getResponseTimeMs(),
+                mostReadable.getModelName(),
+                highestQuality.getModelName(), highestQuality.getQualityScore(),
+                recommendation
+        );
+    }
     // Average response time per model
     public Map<String, Double> getAverageResponseTimes(List<LLMResponse> responses) {
         return responses.stream()

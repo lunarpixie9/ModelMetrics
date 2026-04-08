@@ -11,6 +11,8 @@ public class LLMResponse {
     private double readabilityScore;
     private boolean containsCodeBlock;
     private String lengthCategory;
+    private double qualityScore;
+    private String promptType;
 
     public LLMResponse(String modelName, String responseText, long responseTimeMs) {
         this.modelName = modelName;
@@ -77,7 +79,10 @@ public class LLMResponse {
     public double getReadabilityScore() { return readabilityScore; }
     public boolean isContainsCodeBlock() { return containsCodeBlock; }
     public String getLengthCategory() { return lengthCategory; }
-
+    public void setQualityScore(double score) { this.qualityScore = score; }
+    public void setPromptType(String type) { this.promptType = type; }
+    public double getQualityScore() { return qualityScore; }
+    public String getPromptType() { return promptType; }
     @Override
     public String toString() {
         return String.format("[%s] time=%dms words=%d readability=%.1f category=%s",

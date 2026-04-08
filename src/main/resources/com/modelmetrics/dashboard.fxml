@@ -72,7 +72,7 @@
             <HBox spacing="8" alignment="CENTER_LEFT"
                   style="-fx-padding: 6 10; -fx-background-color: #2A2A2C; -fx-background-radius: 8;">
                 <Label text="●" style="-fx-text-fill: #efc53b; -fx-font-size: 9px;"/>
-                <Label text="Gemini 1.5 Pro"
+                <Label text="Gemini 2.0 Flash"
                        style="-fx-text-fill: #AAAAAA; -fx-font-size: 11px; -fx-font-family: 'Poppins';"/>
             </HBox>
             <HBox spacing="8" alignment="CENTER_LEFT"
@@ -177,7 +177,7 @@
                 <Label text="Lower is better"
                        style="-fx-font-family: 'Poppins'; -fx-font-size: 10px; -fx-text-fill: #AAAAAA;"/>
                 <BarChart fx:id="responseTimeChart" VBox.vgrow="ALWAYS"
-                          style="-fx-background-color: transparent;" animated="true" legendVisible="false">
+                          style="-fx-background-color: transparent;" animated="false" legendVisible="false">
                     <xAxis><CategoryAxis/></xAxis>
                     <yAxis><NumberAxis/></yAxis>
                 </BarChart>
@@ -191,7 +191,7 @@
                 <Label text="Response verbosity comparison"
                        style="-fx-font-family: 'Poppins'; -fx-font-size: 10px; -fx-text-fill: #AAAAAA;"/>
                 <BarChart fx:id="wordCountChart" VBox.vgrow="ALWAYS"
-                          style="-fx-background-color: transparent;" animated="true" legendVisible="false">
+                          style="-fx-background-color: transparent;" animated="false" legendVisible="false">
                     <xAxis><CategoryAxis/></xAxis>
                     <yAxis><NumberAxis/></yAxis>
                 </BarChart>
@@ -213,6 +213,7 @@
                     <TableColumn fx:id="lengthCategoryCol" text="Length" prefWidth="80"/>
                     <TableColumn fx:id="codeBlockCol" text="Has Code" prefWidth="85"/>
                     <TableColumn fx:id="responseCol" text="Response Preview" prefWidth="320"/>
+                    <TableColumn fx:id="qualityScoreCol" text="Quality (0-10)" prefWidth="110"/>
                 </columns>
                 <placeholder>
                     <Label text="No results yet — run an evaluation to see data here"

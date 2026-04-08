@@ -35,7 +35,14 @@ public class LLMClient {
         return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
                     long time = System.currentTimeMillis() - start;
+                    System.out.println("=== GPT-4o ===");
+                    System.out.println("STATUS: " + response.statusCode());
+                    System.out.println("BODY: " + response.body());
                     JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
+                    if (json.has("error")) {
+                        String error = json.getAsJsonObject("error").get("message").getAsString();
+                        return new LLMResponse("GPT-4o", "ERROR: " + error, time);
+                    }
                     String text = json.getAsJsonArray("choices")
                             .get(0).getAsJsonObject()
                             .getAsJsonObject("message")
@@ -53,7 +60,7 @@ public class LLMClient {
                 """.formatted(prompt);
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=" + apiKey))
+                .uri(URI.create("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .build();
@@ -62,14 +69,21 @@ public class LLMClient {
         return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
                     long time = System.currentTimeMillis() - start;
+                    System.out.println("=== GEMINI ===");
+                    System.out.println("STATUS: " + response.statusCode());
+                    System.out.println("BODY: " + response.body());
                     JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
+                    if (json.has("error")) {
+                        String error = json.getAsJsonObject("error").get("message").getAsString();
+                        return new LLMResponse("Gemini 2.0 Flash", "ERROR: " + error, time);
+                    }
                     String text = json.getAsJsonArray("candidates")
                             .get(0).getAsJsonObject()
                             .getAsJsonObject("content")
                             .getAsJsonArray("parts")
                             .get(0).getAsJsonObject()
                             .get("text").getAsString();
-                    return new LLMResponse("Gemini 1.5 Pro", text, time);
+                    return new LLMResponse("Gemini 2.5 Flash", text, time);
                 });
     }
 
@@ -95,7 +109,14 @@ public class LLMClient {
         return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
                     long time = System.currentTimeMillis() - start;
+                    System.out.println("=== CLAUDE ===");
+                    System.out.println("STATUS: " + response.statusCode());
+                    System.out.println("BODY: " + response.body());
                     JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
+                    if (json.has("error")) {
+                        String error = json.getAsJsonObject("error").get("message").getAsString();
+                        return new LLMResponse("Claude Sonnet", "ERROR: " + error, time);
+                    }
                     String text = json.getAsJsonArray("content")
                             .get(0).getAsJsonObject()
                             .get("text").getAsString();
